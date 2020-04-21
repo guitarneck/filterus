@@ -9,6 +9,9 @@ class URL extends \Filterus\Filter {
         'query' => false,
     );
 
+    public function setDefault ($var) {}
+    public function getDefault () {}
+
     public function filter($var) {
         $flags = 0;
         if ($this->options['path']) {

@@ -12,10 +12,12 @@ abstract class Filter {
         'float'  => 'Filterus\Filters\Floats',
         'int'    => 'Filterus\Filters\Ints',
         'ip'     => 'Filterus\Filters\IP',
+        'date'   => 'Filterus\Filters\Dates',
         'object' => 'Filterus\Filters\Objects',
         'raw'    => 'Filterus\Filters\Raw',
         'regex'  => 'Filterus\Filters\Regex',
         'string' => 'Filterus\Filters\Strings',
+        'time'   => 'Filterus\Filters\Times',
         'url'    => 'Filterus\Filters\URL',
         'uuid'   => 'Filterus\Filters\UUID',
     );
@@ -71,6 +73,17 @@ abstract class Filter {
 
     abstract public function filter($var);
 
+    public function filterDefault($var=null) {
+        if ( key_exists('default',$this->options) && $var === null )
+        {
+            return $this->getDefault();
+        }
+        return $var;
+    }
+
+    abstract public function setDefault($var);
+    abstract public function getDefault ();
+
     final public function __construct(array $options = array()) {
         $this->setOptions($options);
     }
@@ -86,6 +99,10 @@ abstract class Filter {
 
     public function setOptions(array $options) {
         $this->options = $options + $this->defaultOptions;
+        if ( key_exists('default',$this->options) && strlen($this->options['default']) > 0 )
+        {
+            $this->setDefault( unserialize($this->options['default']) );
+        }
         return $this;
     }
 

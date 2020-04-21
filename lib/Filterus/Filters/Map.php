@@ -8,6 +8,9 @@ class Map extends \Filterus\Filter {
         'filters' => array(),
     );
 
+    public function setDefault ($var) {}
+    public function getDefault () {}
+
     public function filter($var) {
         if (!is_object($var) && !is_array($var)) {
             return null;

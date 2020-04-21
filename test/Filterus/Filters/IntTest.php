@@ -19,8 +19,8 @@ class IntTest extends \PHPUnit_Framework_TestCase {
             array(array('max' => 2), 1, 1, true),
             array(array('max' => 2), 2, 2, true),
             array(array('max' => 2), 3, 2, false),
-            array(array('max' => 2, 'default' => 5), 3, 2, false),
-            array(array('min' => 2, 'default' => 5), 1, 2, false),
+            array(array('max' => 2, 'default' => serialize(5)), 3, 2, false),
+            array(array('min' => 2, 'default' => serialize(5)), 1, 2, false),
         );
     }
 

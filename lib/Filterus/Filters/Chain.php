@@ -8,6 +8,9 @@ class Chain extends \Filterus\Filter {
         'filters' => array(),
     );
 
+    public function setDefault ($var) {}
+    public function getDefault () {}
+
     public function filter($var) {
         foreach ($this->options['filters'] as $filter) {
             $filter = self::factory($filter);

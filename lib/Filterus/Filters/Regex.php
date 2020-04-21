@@ -13,7 +13,7 @@ class Regex extends Strings {
     public function filter($var) {
         $var = parent::filter($var);
         if (!preg_match($this->options['regex'], $var)) {
-            return null;
+            return $this->filterDefault();
         }
         return $var;
     }

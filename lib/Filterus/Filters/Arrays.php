@@ -3,7 +3,9 @@
 namespace Filterus\Filters;
 
 class Arrays extends \Filterus\Filter {
-    
+
+    private $default = [];
+
     protected $defaultOptions = array(
         'min' => 0,
         'max' => PHP_INT_MAX,
@@ -11,15 +13,18 @@ class Arrays extends \Filterus\Filter {
         'values' => null,
     );
 
+    public function setDefault ($var) { $this->default = $var; }
+    public function getDefault () { return $this->default; }
+
     public function filter($var) {
         if (!is_array($var)) {
-            return null;
+            return $this->filterDefault();
         }
         $count = count($var);
         if ($this->options['min'] > $count) {
-            return null;
+            return $this->filterDefault();
         } elseif ($this->options['max'] < $count) {
-            return null;
+            return $this->filterDefault();
         }
         if ($this->options['keys']) {
             $filter = self::factory($this->options['keys']);

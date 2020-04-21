@@ -22,6 +22,11 @@ Each filter class has two primary methods:
     * `default` - `array()` - Default return value
 * `bool` - Boolean matching
     * `default` - `null` - Default return value
+* `date` - Matches date
+    * `min` - 10 - Minimum length
+    * `max` - 10 - Maximum length
+    * `format` - `Y-m-d` - The format to run on
+    * `default` - `now` - Default date value  (See PHP DateTime: formats date)
 * `email` - Matches emails
 * `float` - Floating point numbers
     * `min` - `null` - Minimum length
@@ -50,9 +55,38 @@ Each filter class has two primary methods:
     * `min` - 0 - Minimum length
     * `max` - PHP_INT_MAX - Maximum length
     * `default` - `''` - Default return value
+* `time` - Matches time
+    * `min` - 8 - Minimum length
+    * `max` - 8 - Maximum length
+    * `format` - `G:i:s` - The format to run on
+    * `time` - `now` - The time default value (See PHP DateTime: formats time)
 * `url` - Matches URLs
     * `path` - `false` - Force a path to be present
     * `query` - `false` - Force a query string to be present
+
+## Assigning default option:
+
+A default value can be sets through the options, using a PHP serialized value.
+
+For example, the default value for a `string` is `''`. You want to change this default value to `null`, like this:
+
+``` php
+$filter = Filter::factory('string,min:5,default:'.serialize(null));
+```
+Or
+``` php
+$filter = new Filters\String(array('min' => 5, 'default' => serialize(null)));
+```
+
+You may ask the class default value to be used whenever it fails, like this:
+
+``` php
+$filter = Filter::factory('string,min:5,default:');
+```
+Or
+``` php
+$filter = new Filters\String(array('min' => 5, 'default' => ''));
+```
 
 ## Complex Filters
 

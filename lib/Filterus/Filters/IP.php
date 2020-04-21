@@ -11,6 +11,9 @@ class IP extends \Filterus\Filter {
         'reserved' => true,
     );
 
+    public function setDefault ($var) {}
+    public function getDefault () {}
+
     public function filter($var) {
         $flags = 0;
         if ($this->options['ipv4']) {
